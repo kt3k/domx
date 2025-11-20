@@ -55,7 +55,7 @@ function appendChildren(
 ) {
   if (Array.isArray(children)) {
     for (const child of children) {
-      parent.appendChild(child)
+      appendChildren(parent, child)
     }
   } else if (typeof children === "string") {
     parent.appendChild(document.createTextNode(children))
