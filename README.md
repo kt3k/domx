@@ -1,4 +1,4 @@
-# domx v0.1.4
+# domx v0.1.5
 
 > A minimal jsx runtime. Renders jsx into DOM nodes
 
