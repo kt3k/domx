@@ -6,13 +6,12 @@
  */
 
 type Props = Record<string, unknown>
-type EL = HTMLElement | DocumentFragment
 
 /** jsx factory */
 export function jsx(
-  type: string | ((props: Props) => EL),
-  props: { children: boolean | string | EL | EL[] } & Props,
-): EL {
+  type: string | ((props: Props) => JSX.Element),
+  props: { children: boolean | string | JSX.Element | JSX.Element[] } & Props,
+): JSX.Element {
   if (typeof type === "function") {
     return type(props)
   }
@@ -35,24 +34,24 @@ export function jsx(
 
 /** jsxs factory */
 export function jsxs(
-  type: string | ((props: Props) => EL),
-  props: { children: EL[] } & Props,
-): EL {
+  type: string | ((props: Props) => JSX.Element),
+  props: { children: JSX.Element[] } & Props,
+): JSX.Element {
   return jsx(type, props)
 }
 
 /** Fragment factory */
 export function Fragment(
-  { children }: { children: EL | EL[] },
-): DocumentFragment {
-  const fragment = document.createDocumentFragment()
+  { children }: { children: JSX.Element | JSX.Element[] },
+): JSX.Element {
+  const fragment = document.createDocumentFragment() as unknown as JSX.Element
   appendChildren(fragment, children)
   return fragment
 }
 
 function appendChildren(
-  parent: EL,
-  children: undefined | null | boolean | string | EL | EL[],
+  parent: JSX.Element,
+  children: undefined | null | boolean | string | JSX.Element | JSX.Element[],
 ) {
   if (Array.isArray(children)) {
     for (const child of children) {
@@ -76,5 +75,8 @@ export declare namespace JSX {
   interface IntrinsicElements {
     // deno-lint-ignore no-explicit-any
     [elemName: string]: any
+  }
+
+  interface Element extends HTMLElement {
   }
 }
