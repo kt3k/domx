@@ -1,4 +1,5 @@
-version: 0.1.2
+version: 0.1.3
 commit: "chore: bump to v%.%.%"
 files:
   README.md: v%.%.%
+  deno.json: '"version": "%.%.%"'
