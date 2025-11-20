@@ -63,6 +63,8 @@ function appendChildren(
     if (children) {
       parent.appendChild(document.createTextNode(String(children)))
     }
+  } else if (typeof children === "number") {
+    parent.appendChild(document.createTextNode(String(children)))
   } else if (typeof children === "undefined") {
     parent.appendChild(document.createTextNode("undefined"))
   } else if (children != null) {
