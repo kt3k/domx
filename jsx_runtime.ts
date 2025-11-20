@@ -71,6 +71,7 @@ function appendChildren(
   }
 }
 
+/** JSX namespace */
 export declare namespace JSX {
   interface IntrinsicElements {
     div: HTMLDivElement
