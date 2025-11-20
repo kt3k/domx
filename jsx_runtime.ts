@@ -74,15 +74,6 @@ function appendChildren(
 /** JSX namespace */
 export declare namespace JSX {
   interface IntrinsicElements {
-    div: HTMLDivElement
-    span: HTMLSpanElement
-    p: HTMLParagraphElement
-    a: HTMLAnchorElement
-    ul: HTMLUListElement
-    li: HTMLLIElement
-    button: HTMLButtonElement
-    input: HTMLInputElement
-    // Add more elements as needed
     // deno-lint-ignore no-explicit-any
     [elemName: string]: any
   }
