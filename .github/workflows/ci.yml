@@ -1,0 +1,21 @@
+name: ci
+on:
+  push:
+    branches: main
+    tags: "[0-9]+.[0-9]+.[0-9]+"
+  pull_request:
+    branches: main
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: denoland/setup-deno@v2
+      - run: deno fmt --check
+      - run: deno lint
+      - run: deno test
+      - run: deno publish
+        if: github.ref_type == 'tag'
