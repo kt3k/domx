@@ -1,6 +1,6 @@
 {
   "name": "@kt3k/domx",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "exports": {
     ".": "./empty.ts",
     "./jsx-runtime": "./jsx_runtime.ts"

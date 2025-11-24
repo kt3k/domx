@@ -1,5 +1,5 @@
-version: 0.1.8
+version: 0.1.9
 commit: "chore: bump to v%.%.%"
 files:
   README.md: v%.%.%
-  deno.json: '"version": "%.%.%"'
+  jsx-runtime/deno.json: '"version": "%.%.%"'
