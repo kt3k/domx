@@ -48,7 +48,9 @@ span.classList.add("m-1", "p-1");
 
 ## Types
 
-Currently returned values of JSX expressions are typed as `HTMLElement`. If you need more granular types such as HTMLInputElement, HTMLButtonElement, etc, then you need to cast it:
+Currently returned values of JSX expressions are typed as `HTMLElement`. If you
+need more granular types such as HTMLInputElement, HTMLButtonElement, etc, then
+you need to cast it:
 
 ```
 const button = <button type="button">hello</button> as HTMLButtonElement
