@@ -1,23 +1,29 @@
-# domx v0.1.9
+# domx v0.1.10
 
 > A minimal jsx runtime. Renders jsx into DOM nodes
 
-# Usage
+# Install
+
+as npm package
 
 ```
 npx jsr add @kt3k/domx
 ```
 
+as jsr package
+
 ```
 deno install jsr:@kt3k/domx
 ```
 
-Specify it in `@jsxRuntime`
+Specify it in `@jsxImportSource`
 
 ```
 /** @jsxImportSource @kt3k/domx */
 /** @jsxRuntime automatic */
 ```
+
+# Usage
 
 Write JSX and it's evaluated as an equivalent DOM nodes
 
@@ -29,7 +35,7 @@ const div = (
 )
 ```
 
-is equivalent of:
+is roughly equivalent of:
 
 ```
 const div = document.createElement("div")
@@ -38,6 +44,15 @@ const div.classList.add("flex");
 const span = document.createElement("span")
 span.textContent = "hello"
 span.classList.add("m-1", "p-1");
+```
+
+## Types
+
+Currently returned values of JSX expressions are typed as `HTMLElement`. If you need more granular types such as HTMLInputElement, HTMLButtonElement, etc, then you need to cast it:
+
+```
+const button = <button type="button">hello</button> as HTMLButtonElement
+const input = <input type="text" /> as HTMLInputElement
 ```
 
 # License
