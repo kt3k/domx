@@ -8,9 +8,11 @@
 type Props = Record<string, unknown>
 
 /** jsx factory */
-export function jsx(
-  type: string | ((props: Props) => JSX.Element),
-  props: { children: boolean | string | JSX.Element | JSX.Element[] } & Props,
+export function jsx<const K extends string>(
+  type: K | ((props: Props) => JSX.Element),
+  props:
+    & { children: boolean | number | string | JSX.Element | JSX.Element[] }
+    & Props,
 ): JSX.Element {
   if (typeof type === "function") {
     return type(props)
@@ -29,20 +31,27 @@ export function jsx(
       }
     },
   )
-  return el
+  return el as JSX.Element
 }
 
 /** jsxs factory */
-export function jsxs(
-  type: string | ((props: Props) => JSX.Element),
-  props: { children: JSX.Element[] } & Props,
+export function jsxs<const K extends string>(
+  type: K | ((props: Props) => JSX.Element),
+  props:
+    & { children: boolean | number | string | JSX.Element | JSX.Element[] }
+    & Props,
 ): JSX.Element {
+  if (typeof type === "function") {
+    return type(props)
+  }
   return jsx(type, props)
 }
 
 /** Fragment factory */
 export function Fragment(
-  { children }: { children: JSX.Element | JSX.Element[] },
+  { children }: {
+    children: boolean | number | string | JSX.Element | JSX.Element[]
+  },
 ): JSX.Element {
   const fragment = document.createDocumentFragment() as unknown as JSX.Element
   appendChildren(fragment, children)
@@ -51,7 +60,14 @@ export function Fragment(
 
 function appendChildren(
   parent: JSX.Element,
-  children: undefined | null | boolean | string | JSX.Element | JSX.Element[],
+  children:
+    | undefined
+    | null
+    | boolean
+    | number
+    | string
+    | JSX.Element
+    | JSX.Element[],
 ) {
   if (Array.isArray(children)) {
     for (const child of children) {
@@ -75,10 +91,16 @@ function appendChildren(
 /** JSX namespace */
 export declare namespace JSX {
   interface IntrinsicElements {
-    // deno-lint-ignore no-explicit-any
-    [elemName: string]: any
+    [el: string]: Props
   }
 
-  interface Element extends HTMLElement {
-  }
+  /*
+  type Element<K extends string = string> = K extends "div" ? HTMLDivElement
+    : K extends "input" ? HTMLInputElement
+    : K extends "button" ? HTMLButtonElement
+    : K extends "span" ? HTMLSpanElement
+    : K extends "Fragment" ? DocumentFragment
+    : HTMLElement
+    */
+  type Element = HTMLElement
 }
